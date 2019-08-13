@@ -5,6 +5,7 @@ STRIP ?= strip
 RM ?= rm -f
 
 TARGET = q2textures
+LIB = -lphysfs
 
 CCX = i686-w64-mingw32-gcc
 LIBX = /usr/i686-w64-mingw32/sys-root/mingw/lib
@@ -20,11 +21,11 @@ endif
 
 all: 
 	$(E) [CC] $(TARGET)
-	$(Q)$(CC) -std=c99 -o $(TARGET) $(TARGET).c
+	$(Q)$(CC) -std=c99 -o $(TARGET) $(TARGET).c $(LIB)
 
 win:
 	$(E) [CC] $(TARGET).exe
-	$(Q)$(CCX) -std=c99 -o $(TARGET).exe $(TARGET).c -static -static-libgcc
+	$(Q)$(CCX) -std=c99 -o $(TARGET).exe $(TARGET).c -static -static-libgcc $(LIBX)/libphysfs.a $(LIBX)/libz.a
 
 strip: 
 	$(E) [STRIP]
